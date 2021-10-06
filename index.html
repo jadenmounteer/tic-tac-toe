@@ -8,13 +8,16 @@
     <!-- Import the webpage's stylesheet -->
     <link rel="stylesheet" href="css/main.css" />
     <!-- Link to the js file(s) -->
-    <script src="js/game.js" defer></script>
-    <script src="js/main.js" defer></script>
+    <script type="module" src="js/isTouchScreenDevice.js" defer></script>
+    <script type="module" src="js/game.js" defer></script>
+    <script type="module" src="js/main.js" defer></script>
 </head>
 <body>
     <!-- Tic Tac Toe board -->
     <!-- Markup inspired by this codepen: https://codepen.io/xunnn/pen/yEmMbm -->
     <h1>Tic Tac Toe</h1>
+    <!-- Header to show who's turn it is -->
+    <h2 id="whose-turn"></h2>
     <table>
         <tr>
             <td class="game-cell"></td>
@@ -34,7 +37,10 @@
     </table>
 
     <!-- Reset button -->
-    <h2 class="text-button" id="reset-button" onclick="resetBoard()">Reset</h2>
+    <h2 class="text-button" id="reset-button">Reset</h2>
+
+    <!-- Header to show the winner -->
+    <h2 id="whose-the-winner"></h2>
     
     
 </body>

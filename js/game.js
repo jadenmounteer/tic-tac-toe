@@ -1,15 +1,18 @@
+// Imports
+import isTouchScreenDevice from './isTouchScreenDevice.js';
+
 /* 
 The game class.
 Represents a round of tic tac toe
 */
-class Game {
+export default class Game {
 
     /* The class's constructor. Used to create a new game object .*/
-    constructor(round, isTouchScreenDevice){
+    constructor(round){
         this.round = round; // Keeps track of what round we are on
         this.turn = "x"; // This property tracks who's turn it is.
         this.cells = document.getElementsByClassName("game-cell"); // This property is a list of all the 9 game cells
-        this.isTouchScreenDevice = isTouchScreenDevice; // A boolean that tracks if the user is on touch screen
+        this.isTouchScreenDevice = isTouchScreenDevice(); // A boolean that tracks if the user is on touch screen
     }
 
     /** METHODS **/
@@ -43,11 +46,107 @@ class Game {
                 cell.appendChild(text);
                 // Change turn to x
                 this.turn = "x";
-                
             }
             
         }
 
+        // Call the updateGame() method to chek if we should end the game
+        this.updateGame();
+
+    }
+
+
+    /* 
+    Resets the gambe board
+    */
+    resetBoard() {
+        // Loop through the cells 
+        for (let i=0; i<this.cells.length; i++) {
+            // Change inner html to ""
+            this.cells[i].innerHTML = ""
+        }
+
+        // Change turn to x
+        this.turn = "x";
+
+        // Remove the winner message
+        document.getElementById('whose-the-winner').innerHTML = "";
+
+         // Call the updateGame() method
+         this.updateGame();
+    }
+
+    /* 
+    Checks if the game is ended.
+    Calls the appropriate functions.
+    */
+    updateGame() {
+        // Check if anybody has won
+        let didXWin = this.checkIfWon("X");
+        let didOWin = this.checkIfWon("O");
+
+        // Check if game is a tie
+        let gameIsATie = this.checkIfTie();
+
+        // If nobody has won the game yet, or tied, display who's turn it is
+        document.getElementById('whose-turn').innerHTML = "It is " + this.turn + "'s turn!";
+        
+    }
+
+    /* 
+    Checks all of the possible ways to win
+    */
+    checkIfWon(xOro) {
+        const whoseTheWinner = document.getElementById('whose-the-winner');
+        // Check if 3 in a row diagnaly from left to right
+        if (this.cells[0].innerHTML == xOro && this.cells[4].innerHTML == xOro && this.cells[8].innerHTML == xOro) {
+            whoseTheWinner.innerHTML = xOro + " wins!";
+        }
+
+        // Check if 3 in a row diagnaly from right  to left
+        if (this.cells[2].innerHTML == xOro && this.cells[4].innerHTML == xOro && this.cells[6].innerHTML == xOro) {
+            whoseTheWinner.innerHTML = xOro + " wins!";
+        }
+
+        // Check if 3 in a row on the top
+        if (this.cells[0].innerHTML == xOro && this.cells[1].innerHTML == xOro && this.cells[2].innerHTML == xOro) {
+            whoseTheWinner.innerHTML = xOro + " wins!";
+        }
+
+        // Check if 3 in a row in the middle
+        if (this.cells[3].innerHTML == xOro && this.cells[4].innerHTML == xOro && this.cells[5].innerHTML == xOro) {
+            whoseTheWinner.innerHTML = xOro + " wins!";
+        }
+
+        // Check if 3 in a row on the bottom
+        if (this.cells[6].innerHTML == xOro && this.cells[7].innerHTML == xOro && this.cells[8].innerHTML == xOro) {
+            whoseTheWinner.innerHTML = xOro + " wins!";
+        }
+        
+
+        // Check if 3 in a row on the far left column vertically
+        if (this.cells[0].innerHTML == xOro && this.cells[3].innerHTML == xOro && this.cells[6].innerHTML == xOro) {
+            whoseTheWinner.innerHTML = xOro + " wins!";
+        }
+
+        // Check if 3 in a row in the middle column vertically
+        if (this.cells[1].innerHTML == xOro && this.cells[4].innerHTML == xOro && this.cells[7].innerHTML == xOro) {
+            whoseTheWinner.innerHTML = xOro + " wins!";
+        }
+
+        // Check if 3 in a row in the far right column vertically
+        if (this.cells[2].innerHTML == xOro && this.cells[5].innerHTML == xOro && this.cells[8].innerHTML == xOro) {
+            whoseTheWinner.innerHTML = xOro + " wins!";
+        }
+
+    }
+
+    /* 
+    Checks if the game is a tie
+    by seeing if all of the cells are filled out
+    */
+    checkIfTie() {
+        
     }
 
     /* 
@@ -70,6 +169,11 @@ class Game {
                 }
                 
             }
+
+            // Set the onclick method for the reset button
+            document.getElementById("reset-button").addEventListener("click", function(){objectName.resetBoard();});
+             // Call the updateGame() method
+            this.updateGame();
 
         }
         
