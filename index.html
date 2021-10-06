@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- Import the webpage's stylesheet -->
+    <link rel="stylesheet" href="css/main.css" />
+    <!-- Link to the js file(s) -->
+    <script src="js/game.js" defer></script>
+    <script src="js/main.js" defer></script>
+</head>
+<body>
+    <!-- Tic Tac Toe board -->
+    <!-- Markup inspired by this codepen: https://codepen.io/xunnn/pen/yEmMbm -->
+    <h1>Tic Tac Toe</h1>
+    <table>
+        <tr>
+            <td class="game-cell"></td>
+            <td class="vert game-cell"></td>
+            <td class="game-cell"></td>
+        </tr>
+        <tr>
+            <td class="hori game-cell"></td>
+            <td class="vert hori game-cell"></td>
+            <td class="hori game-cell"></td>
+        </tr>
+        <tr>
+            <td class="game-cell"></td>
+            <td class="vert game-cell"></td>
+            <td class="game-cell"></td>
+        </tr>
+    </table>
+
+    <!-- Reset button -->
+    <h2 class="text-button" id="reset-button" onclick="resetBoard()">Reset</h2>
+    
+    
+</body>
+</html>

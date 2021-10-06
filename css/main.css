@@ -1,0 +1,53 @@
+/* Style the header */
+h1 {
+    /* Align it in the center of the page */
+    text-align: center;
+}
+
+/* Style the table cells */
+td {
+    /* Make them 100px wide  and 100px tall */
+    width: 100px;
+    height: 100px;
+
+    /* Center the text within the cells */
+    text-align: center;
+}
+
+/* Style the table itself */
+table {
+    /* Center the table */
+    margin: auto;
+}
+
+/* Style the cells with the .vert class */
+.vert {
+    /* Give them left and right borders */
+    border-left: 2px solid black;
+    border-right: 2px solid black;
+}
+
+/* Style the cells with the .hori class */
+.hori {
+    /* Give them top and bottom borders */
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+}
+
+/* Style the reset button */
+#reset-button {
+    margin: auto;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.text-button {
+    border: 2px solid black;
+    width: 10%;
+}
+
+.text-button:hover {
+    cursor: pointer;
+    color: white;
+    background-color: black;
+}
