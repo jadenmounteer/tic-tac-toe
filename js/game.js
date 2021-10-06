@@ -85,11 +85,25 @@ export default class Game {
         let didXWin = this.checkIfWon("X");
         let didOWin = this.checkIfWon("O");
 
-        // Check if game is a tie
-        let gameIsATie = this.checkIfTie();
+        // If there is a winner...
+        if (didXWin || didOWin) {
+            // It's game over, do nothing
+        }
+        else {
+             // Check if game is a tie
+            let gameIsATie = this.checkIfTie();
+            if (!gameIsATie) {
+                // If nobody has won the game yet, or tied, display who's turn it is
+                document.getElementById('whose-the-winner').innerHTML = "It is " + this.turn + "'s turn!";
+            }
+            else {
+                document.getElementById('whose-the-winner').innerHTML = "It's a draw!";
+            }
+        }
 
-        // If nobody has won the game yet, or tied, display who's turn it is
-        document.getElementById('whose-turn').innerHTML = "It is " + this.turn + "'s turn!";
+       
+
+        
         
     }
 
@@ -98,45 +112,62 @@ export default class Game {
     */
     checkIfWon(xOro) {
         const whoseTheWinner = document.getElementById('whose-the-winner');
+        let foundAWinner = false;
+
         // Check if 3 in a row diagnaly from left to right
         if (this.cells[0].innerHTML == xOro && this.cells[4].innerHTML == xOro && this.cells[8].innerHTML == xOro) {
             whoseTheWinner.innerHTML = xOro + " wins!";
+            foundAWinner = true;
         }
 
         // Check if 3 in a row diagnaly from right  to left
         if (this.cells[2].innerHTML == xOro && this.cells[4].innerHTML == xOro && this.cells[6].innerHTML == xOro) {
             whoseTheWinner.innerHTML = xOro + " wins!";
+            foundAWinner = true;
         }
 
         // Check if 3 in a row on the top
         if (this.cells[0].innerHTML == xOro && this.cells[1].innerHTML == xOro && this.cells[2].innerHTML == xOro) {
             whoseTheWinner.innerHTML = xOro + " wins!";
+            foundAWinner = true;
         }
 
         // Check if 3 in a row in the middle
         if (this.cells[3].innerHTML == xOro && this.cells[4].innerHTML == xOro && this.cells[5].innerHTML == xOro) {
             whoseTheWinner.innerHTML = xOro + " wins!";
+            foundAWinner = true;
         }
 
         // Check if 3 in a row on the bottom
         if (this.cells[6].innerHTML == xOro && this.cells[7].innerHTML == xOro && this.cells[8].innerHTML == xOro) {
             whoseTheWinner.innerHTML = xOro + " wins!";
+            foundAWinner = true;
         }
         
 
         // Check if 3 in a row on the far left column vertically
         if (this.cells[0].innerHTML == xOro && this.cells[3].innerHTML == xOro && this.cells[6].innerHTML == xOro) {
             whoseTheWinner.innerHTML = xOro + " wins!";
+            foundAWinner = true;
         }
 
         // Check if 3 in a row in the middle column vertically
         if (this.cells[1].innerHTML == xOro && this.cells[4].innerHTML == xOro && this.cells[7].innerHTML == xOro) {
             whoseTheWinner.innerHTML = xOro + " wins!";
+            foundAWinner = true;
         }
 
         // Check if 3 in a row in the far right column vertically
         if (this.cells[2].innerHTML == xOro && this.cells[5].innerHTML == xOro && this.cells[8].innerHTML == xOro) {
             whoseTheWinner.innerHTML = xOro + " wins!";
+            foundAWinner = true;
+        }
+
+        if (foundAWinner) {
+            return true;
+        }
+        else {
+            return false;
         }
 
     }
@@ -146,7 +177,25 @@ export default class Game {
     by seeing if all of the cells are filled out
     */
     checkIfTie() {
-        
+        let foundABlank = false;
+        // Loop through all of the cells
+        for (let i=0; i<this.cells.length; i++) {
+            // Check if the cell is blank
+            if (this.cells[i].innerHTML =="") {
+                // if it is, set foundABlank to true
+                foundABlank = true;
+            }
+        }
+
+        // If we found a blank 
+        if (foundABlank) {
+            // return false, it is not a tie
+            return false;
+        }
+        else {
+            // If we did not find a blank, it is a tie. Return true
+            return true;
+        }
     }
 
     /* 
